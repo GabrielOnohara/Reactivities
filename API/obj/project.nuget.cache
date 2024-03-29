@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "JaVNwe1SuzTocgCCD2Nd+zOwMfAQsl3rJMRjXprrEHPtqREYkdjsM7md/FGyB7YY9gocMFX6d3fmo+WYPcv3yA==",
+  "success": true,
+  "projectFilePath": "/home/gabrielonohara/Projects/Reactivites(.NET and React)/demo/Reactivities/API/API.csproj",
+  "expectedPackageFiles": [
+    "/home/gabrielonohara/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/home/gabrielonohara/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/gabrielonohara/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "/home/gabrielonohara/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "/home/gabrielonohara/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "/home/gabrielonohara/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
