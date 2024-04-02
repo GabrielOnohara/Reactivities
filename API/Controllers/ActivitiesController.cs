@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 using Domain;
-using MediatR;
 using Application.Activities;
 namespace API.Controllers
 {
