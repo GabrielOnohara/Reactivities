@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, List } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import "./styles.css";
 import { Activity } from "../models/activity";
 import NavBar from "./NavBar";
