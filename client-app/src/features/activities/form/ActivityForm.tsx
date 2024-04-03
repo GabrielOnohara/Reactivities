@@ -5,9 +5,14 @@ import { Activity } from "../../../app/models/activity";
 interface Props {
   activity: Activity | undefined;
   closeForm: () => void;
+  createOrEdit: (activity: Activity) => void;
 }
 
-const ActivityForm = ({ activity: selectedActivity, closeForm }: Props) => {
+const ActivityForm = ({
+  activity: selectedActivity,
+  closeForm,
+  createOrEdit,
+}: Props) => {
   const initialState = selectedActivity ?? {
     id: "",
     title: "",
@@ -20,15 +25,16 @@ const ActivityForm = ({ activity: selectedActivity, closeForm }: Props) => {
 
   const [activity, setActivity] = useState(initialState);
 
-  function handleSubmit() {
-    console.log(activity);
-  }
-
   function handleInputChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     const { name, value } = event.target;
     setActivity({ ...activity, [name]: value });
+  }
+
+  function handleSubmit() {
+    createOrEdit(activity);
+    console.log(activity);
   }
 
   return (
@@ -75,6 +81,7 @@ const ActivityForm = ({ activity: selectedActivity, closeForm }: Props) => {
           positive
           type="submit"
           content="Submit"
+          onClick={() => handleSubmit}
         ></Button>
         <Button
           onClick={closeForm}
