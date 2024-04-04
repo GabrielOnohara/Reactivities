@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import "./styles.css";
 import { Activity } from "../models/activity";
 import NavBar from "./NavBar";
@@ -17,20 +17,11 @@ function App() {
     Activity | undefined
   >(undefined);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
   const [submitting, setSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
-    agent.Activities.list().then((response) => {
-      const activities: Activity[] = [];
-      response.forEach((activity) => {
-        activity.date = activity.date.split("T")[0];
-        activities.push(activity);
-      });
-      setActivities(activities);
-      setLoading(false);
-    });
-  }, []);
+    activityStore.loadActivities();
+  }, [activityStore]);
 
   function handleSelectedActivity(id: string) {
     setSelectedActivity(activities.find((x) => x.id === id));
@@ -81,21 +72,15 @@ function App() {
     });
   }
 
-  if (loading)
+  if (activityStore.loadingInitial)
     return <LoadingComponent content="Loading app"></LoadingComponent>;
 
   return (
     <>
       <NavBar openForm={handleFormOpen}></NavBar>
       <Container style={{ marginTop: "7em" }}>
-        <h2>{activityStore.title}</h2>
-        <Button
-          positive
-          content="Add exclamation!"
-          onClick={activityStore.setTitle}
-        ></Button>
         <ActivityDashboard
-          activities={activities}
+          activities={activityStore.activities}
           selectedActivity={selectedActivity}
           selectActivity={handleSelectedActivity}
           cancelSelectedActivity={handleCancelSelectedActivity}
