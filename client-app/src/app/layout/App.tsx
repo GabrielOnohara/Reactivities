@@ -13,33 +13,11 @@ import { observer } from "mobx-react-lite";
 function App() {
   const { activityStore } = useStore();
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<
-    Activity | undefined
-  >(undefined);
-  const [editMode, setEditMode] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
     activityStore.loadActivities();
   }, [activityStore]);
-
-  function handleSelectedActivity(id: string) {
-    setSelectedActivity(activities.find((x) => x.id === id));
-    setEditMode(false);
-  }
-
-  function handleCancelSelectedActivity() {
-    setSelectedActivity(undefined);
-  }
-
-  function handleFormOpen(id?: string) {
-    id ? handleSelectedActivity(id) : handleCancelSelectedActivity();
-    setEditMode(true);
-  }
-
-  function handleFormClose() {
-    setEditMode(false);
-  }
 
   function handleCreateOrEditActivity(activity: Activity) {
     setSubmitting(true);
@@ -49,16 +27,12 @@ function App() {
           ...activities.filter((x) => x.id !== activity.id),
           activity,
         ]);
-        setSelectedActivity(activity);
-        setEditMode(false);
         setSubmitting(false);
       });
     } else {
       activity.id = uuid();
       agent.Activities.create(activity).then(() => {
         setActivities([...activities, activity]);
-        setSelectedActivity(activity);
-        setEditMode(false);
         setSubmitting(false);
       });
     }
@@ -77,16 +51,10 @@ function App() {
 
   return (
     <>
-      <NavBar openForm={handleFormOpen}></NavBar>
+      <NavBar></NavBar>
       <Container style={{ marginTop: "7em" }}>
         <ActivityDashboard
           activities={activityStore.activities}
-          selectedActivity={selectedActivity}
-          selectActivity={handleSelectedActivity}
-          cancelSelectedActivity={handleCancelSelectedActivity}
-          editMode={editMode}
-          openForm={handleFormOpen}
-          closeForm={handleFormClose}
           createOrEdit={handleCreateOrEditActivity}
           deleteActivity={handleDeleteActivity}
           submitting={submitting}
