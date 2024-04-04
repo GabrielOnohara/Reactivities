@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
 import ActivityList from "./ActivityList";
@@ -37,6 +36,7 @@ const ActivityDashboard = ({
           activities={activities}
           selectActivity={selectActivity}
           deleteActivity={deleteActivity}
+          submitting={submitting}
         />
       </Grid.Column>
       <Grid.Column width="6">
