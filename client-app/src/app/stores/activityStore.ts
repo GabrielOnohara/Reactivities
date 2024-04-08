@@ -7,7 +7,7 @@ export default class ActivityStore {
   selectedActivity: Activity | undefined = undefined;
   editMode: boolean = false;
   loading: boolean = false;
-  loadingInitial: boolean = true;
+  loadingInitial: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -41,7 +41,7 @@ export default class ActivityStore {
       this.selectedActivity = activity;
       return activity;
     } else {
-      this.loadingInitial = true;
+      this.setLoadingInitial(true);
       try {
         activity = await agent.Activities.details(id);
         this.setActivity(activity);

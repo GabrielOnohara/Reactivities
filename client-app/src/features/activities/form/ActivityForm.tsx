@@ -9,7 +9,6 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 const ActivityForm = () => {
   const { activityStore } = useStore();
   const {
-    selectedActivity,
     loading,
     createActivity,
     updateActivity,
