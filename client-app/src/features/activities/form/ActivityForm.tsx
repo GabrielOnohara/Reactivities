@@ -2,10 +2,10 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-
+import { v4 as uuid } from "uuid";
 const ActivityForm = () => {
   const { activityStore } = useStore();
   const {
@@ -16,6 +16,8 @@ const ActivityForm = () => {
     loadingInitial,
   } = activityStore;
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [activity, setActivity] = useState<Activity>({
     id: "",
     title: "",
@@ -41,8 +43,16 @@ const ActivityForm = () => {
   }
 
   function handleSubmit() {
-    activity.id ? updateActivity(activity) : createActivity(activity);
-    console.log(activity);
+    if (!activity.id) {
+      activity.id = uuid();
+      createActivity(activity).then(() =>
+        navigate(`/activities/${activity.id}`)
+      );
+    } else {
+      updateActivity(activity).then(() =>
+        navigate(`/activities/${activity.id}`)
+      );
+    }
   }
 
   if (loadingInitial) return <LoadingComponent content="Loading activity..." />;
