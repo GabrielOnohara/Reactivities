@@ -1,13 +1,23 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
+import { useParams } from "react-router-dom";
+import { Activity } from "../../../app/models/activity";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 const ActivityForm = () => {
   const { activityStore } = useStore();
-  const { selectedActivity, loading, createActivity, updateActivity } =
-    activityStore;
-  const initialState = selectedActivity ?? {
+  const {
+    selectedActivity,
+    loading,
+    createActivity,
+    updateActivity,
+    loadActivity,
+    loadingInitial,
+  } = activityStore;
+  const { id } = useParams();
+  const [activity, setActivity] = useState<Activity>({
     id: "",
     title: "",
     category: "",
@@ -15,9 +25,14 @@ const ActivityForm = () => {
     date: "",
     city: "",
     venue: "",
-  };
+  });
 
-  const [activity, setActivity] = useState(initialState);
+  useEffect(() => {
+    if (id)
+      loadActivity(id).then((activity) => {
+        setActivity(activity!);
+      });
+  }, [id, loadActivity]);
 
   function handleInputChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,6 +45,8 @@ const ActivityForm = () => {
     activity.id ? updateActivity(activity) : createActivity(activity);
     console.log(activity);
   }
+
+  if (loadingInitial) return <LoadingComponent content="Loading activity..." />;
 
   return (
     <Segment clearing>
