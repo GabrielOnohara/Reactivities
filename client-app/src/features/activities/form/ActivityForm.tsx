@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { v4 as uuid } from "uuid";
@@ -106,7 +106,8 @@ const ActivityForm = () => {
           onClick={() => handleSubmit}
         ></Button>
         <Button
-          onClick={() => {}}
+          as={Link}
+          to="/activities"
           floated="right"
           type="button"
           content="Cancel"
