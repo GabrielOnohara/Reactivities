@@ -9,19 +9,18 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetActivities()
         {
-            return  HandleResult(await Mediator.Send(new List.Query()));
+            return HandleResult(await Mediator.Send(new List.Query()));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetActivity(Guid id)
+        public async Task<IActionResult> GetActivity(Guid id)
         {
             return HandleResult(await Mediator.Send(new Details.Query {Id = id}));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateActivity([FromBody] Activity activity){
-            await Mediator.Send(new Create.Command {Activity = activity});
-            return Ok();
+            return HandleResult(await Mediator.Send(new Create.Command {Activity = activity}));
         }
 
         [HttpPut("{id}")]
