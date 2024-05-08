@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "KP0VVwWsEvg56jNqD0OUFA4gVan8qLBByAuzMLBZNET6AyUKMrciYxWKSm0MYXm2kE1xNAKqL4segRHeaP0ntQ==",
+  "dgSpecHash": "J2c0828v5En1Nn3vhqVIoQ2rBE4SnR2KPR1P1n/sGLLEFshg8PIUgo8pIqXcdDKVQh9wCbeLdOOKTfG0iI103g==",
   "success": true,
   "projectFilePath": "/home/gabrielonohara/Projects/Reactivites(.NET and React)/demo/Reactivities/API/API.csproj",
   "expectedPackageFiles": [
     "/home/gabrielonohara/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/home/gabrielonohara/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "/home/gabrielonohara/.nuget/packages/fluentvalidation/11.5.1/fluentvalidation.11.5.1.nupkg.sha512",
+    "/home/gabrielonohara/.nuget/packages/fluentvalidation.aspnetcore/11.3.0/fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "/home/gabrielonohara/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.5.1/fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "/home/gabrielonohara/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/gabrielonohara/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
     "/home/gabrielonohara/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
