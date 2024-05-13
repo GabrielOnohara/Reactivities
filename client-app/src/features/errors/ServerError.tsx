@@ -1,7 +1,5 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
-
-import React from "react";
 import { Container, Header, Segment } from "semantic-ui-react";
 
 const ServerError = () => {
