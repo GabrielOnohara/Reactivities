@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Segment } from "semantic-ui-react";
+import { Button, Header, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -12,6 +12,7 @@ import MyTextAreaInput from "../../../app/common/form/MyTextAreaInput";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import { categoryOptions } from "../../../app/common/options/categoryOptions";
 import MyDateInput from "../../../app/common/form/MyDateInput";
+import { v4 as uuid } from "uuid";
 
 const ActivityForm = () => {
   const { activityStore } = useStore();
@@ -51,37 +52,34 @@ const ActivityForm = () => {
       });
   }, [id, loadActivity]);
 
-  // function handleInputChange(
-  //   event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ) {
-  //   const { name, value } = event.target;
-  //   setActivity({ ...activity, [name]: value });
-  // }
-
-  // function handleSubmit() {
-  //   if (!activity.id) {
-  //     activity.id = uuid();
-  //     createActivity(activity).then(() =>
-  //       navigate(`/activities/${activity.id}`)
-  //     );
-  //   } else {
-  //     updateActivity(activity).then(() =>
-  //       navigate(`/activities/${activity.id}`)
-  //     );
-  //   }
-  // }
+  function handleFormSubmit(activity: Activity) {
+    if (activity.id.length === 0) {
+      const newActivity = {
+        ...activity,
+        id: uuid(),
+      };
+      createActivity(activity).then(() =>
+        navigate(`/activities/${newActivity.id}`)
+      );
+    } else {
+      updateActivity(activity).then(() =>
+        navigate(`/activities/${activity.id}`)
+      );
+    }
+  }
 
   if (loadingInitial) return <LoadingComponent content="Loading activity..." />;
 
   return (
     <Segment clearing>
+      <Header content="Activity Details" sub color="teal"></Header>
       <Formik
         validationSchema={validationSchema}
         enableReinitialize
         initialValues={activity}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleFormSubmit(values)}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, isValid, isSubmitting, dirty }) => (
           <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
             <MyTextInput placeholder="Title" name="title" />
             <MyTextAreaInput
@@ -101,9 +99,11 @@ const ActivityForm = () => {
               timeCaption="time"
               dateFormat="MMMM d, yyyy h:m aa"
             />
+            <Header content="Locations Details" sub color="teal"></Header>
             <MyTextInput placeholder="City" name="city" />
             <MyTextInput placeholder="Venue" name="venue" />
             <Button
+              disabled={isSubmitting || !isValid || !dirty}
               loading={loading}
               floated="right"
               positive
