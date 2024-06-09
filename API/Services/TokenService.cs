@@ -11,9 +11,16 @@ using Microsoft.IdentityModel.Tokens;
 namespace API.Services
 {
     public class TokenService
-    {
-        public string CreateToken(AppUser appUser)
+    {   
+
+        private readonly IConfiguration _config;
+        public TokenService(IConfiguration configuration)
         {
+            _config = configuration;
+        }
+
+        public string CreateToken(AppUser appUser)
+        {   
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, appUser.UserName),
@@ -21,7 +28,7 @@ namespace API.Services
                 new Claim(ClaimTypes.Email, appUser.Email),
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret keysuper secret keysuper secret keysuper secret key"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["TokenKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor{
