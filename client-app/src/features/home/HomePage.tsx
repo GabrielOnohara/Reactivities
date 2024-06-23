@@ -14,8 +14,8 @@ const HomePage = () => {
           />
           Reactivities
         </Header>
-        <Button as={Link} to="/activities" size="huge" inverted>
-          Take me to the Activities!
+        <Button as={Link} to="/login" size="huge" inverted>
+          Login!
         </Button>
       </Container>
     </Segment>

@@ -3,7 +3,8 @@ using Domain;
 using Application.Activities;
 using Microsoft.AspNetCore.Authorization;
 namespace API.Controllers
-{
+{   
+    [AllowAnonymous]
     public class ActivitiesController:BasicApiController
     {
 
