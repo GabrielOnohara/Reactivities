@@ -2,6 +2,7 @@ import { ErrorMessage, Form, Formik } from "formik";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { Button, Header, Label } from "semantic-ui-react";
 import { useStore } from "../../app/stores/store";
+import { observer } from "mobx-react-lite";
 
 function LoginForm() {
   const { userStore } = useStore();
@@ -22,8 +23,8 @@ function LoginForm() {
             color="teal"
             textAlign="center"
           />
-          <MyTextInput placeholder="email" name="email" />
-          <MyTextInput placeholder="password" name="password" type="password" />
+          <MyTextInput placeholder="Eail" name="email" />
+          <MyTextInput placeholder="Password" name="password" type="password" />
           <ErrorMessage
             name="error"
             render={() => (
@@ -38,7 +39,7 @@ function LoginForm() {
           <Button
             loading={isSubmitting}
             positive
-            content="login"
+            content="Login"
             type="submit"
             fluid
           />
@@ -48,4 +49,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default observer(LoginForm);
