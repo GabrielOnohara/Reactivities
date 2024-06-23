@@ -9,6 +9,7 @@ import { useStore } from "../stores/store";
 import { useEffect } from "react";
 import LoadingComponent from "./LoadingComponent";
 import ModalContainer from "../common/modals/ModalContainer";
+import { router } from "../router/Routes";
 
 function App() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function App() {
     if (commonStore.token) {
       userStore.getUser().finally(() => commonStore.setAppLoaded());
     } else {
+      router.navigate("/");
       commonStore.setAppLoaded();
     }
   }, [commonStore, userStore]);
