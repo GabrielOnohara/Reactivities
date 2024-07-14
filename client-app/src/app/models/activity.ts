@@ -56,6 +56,7 @@ export class ActivityFormValues {
       this.id = activity.id;
       this.title = activity.title;
       this.category = activity.category;
+      this.description = activity.description;
       this.date = activity.date;
       this.city = activity.city;
       this.venue = activity.venue;
